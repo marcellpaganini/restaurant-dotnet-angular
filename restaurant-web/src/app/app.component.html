@@ -1,0 +1,14 @@
+<div class="layout">
+  <header class="topbar">
+    <h1>{{ title }}</h1>
+    <nav>
+      <a routerLink="/meals" routerLinkActive="active">Meals</a>
+      <a routerLink="/clients" routerLinkActive="active">Clients</a>
+      <a routerLink="/orders" routerLinkActive="active">Orders</a>
+    </nav>
+  </header>
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>

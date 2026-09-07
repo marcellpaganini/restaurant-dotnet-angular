@@ -1,0 +1,32 @@
+<section class="page">
+  <header class="page-header">
+    <h2>Clients</h2>
+    <button type="button" (click)="loadClients()" [disabled]="loading">Refresh</button>
+  </header>
+
+  <p *ngIf="loading">Loading clients...</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <table *ngIf="!loading && !error">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Created</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients">
+        <td>{{ client.id }}</td>
+        <td>{{ client.name }}</td>
+        <td>{{ client.email }}</td>
+        <td>{{ client.phone || '-' }}</td>
+        <td>{{ client.createdAt | date:'medium' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!loading && !error && clients.length === 0">No clients found.</p>
+</section>

@@ -1,0 +1,32 @@
+<section class="page">
+  <header class="page-header">
+    <h2>Meals</h2>
+    <button type="button" (click)="loadMeals()" [disabled]="loading">Refresh</button>
+  </header>
+
+  <p *ngIf="loading">Loading meals...</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <table *ngIf="!loading && !error">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Available</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let meal of meals">
+        <td>{{ meal.id }}</td>
+        <td>{{ meal.name }}</td>
+        <td>{{ meal.description || '-' }}</td>
+        <td>{{ meal.price | currency }}</td>
+        <td>{{ meal.isAvailable ? 'Yes' : 'No' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!loading && !error && meals.length === 0">No meals found.</p>
+</section>

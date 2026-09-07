@@ -1,0 +1,41 @@
+<section class="page">
+  <header class="page-header">
+    <h2>Orders</h2>
+    <button type="button" (click)="loadOrders()" [disabled]="loading">Refresh</button>
+  </header>
+
+  <p *ngIf="loading">Loading orders...</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <table *ngIf="!loading && !error">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Client</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Total</th>
+        <th>Items</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.id }}</td>
+        <td>{{ order.clientName || order.clientId }}</td>
+        <td>{{ order.orderDate | date:'medium' }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.totalAmount | currency }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let item of order.items">
+              {{ item.quantity }} x {{ item.mealName || ('Meal #' + item.mealId) }}
+              ({{ item.unitPrice | currency }})
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!loading && !error && orders.length === 0">No orders found.</p>
+</section>
